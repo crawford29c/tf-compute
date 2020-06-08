@@ -12,3 +12,9 @@ variable "iaas_classic_username" {
 variable "iaas_classic_api_key" {
   # defined in tfvars
 }
+
+variable "region" {
+  # default region to be used
+    default = "us-south"
+}
+
