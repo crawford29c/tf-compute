@@ -1,21 +1,20 @@
 # provider configuration parameters/variables
 provider "ibm" {
   ibmcloud_api_key   = "${var.ibmcloud_api_key}"
+  generation = 2
   region             = "${var.region}"
   iaas_classic_username = "${var.iaas_classic_username}" 
   iaas_classic_api_key  = "${var.iaas_classic_api_key}" 
 }
 
-resource "ibm_compute_vm_instance" "vm1" {
-hostname             = "vm1"
-domain               = "example.com"
-os_reference_code    = "DEBIAN_8_64"
-datacenter           = "dal10"
-network_speed        = 10
-hourly_billing       = true
-private_network_only = false
-cores                = 1
-memory               = 1024
-disks                = [25]
-local_disk           = false
+# make OS image details visible by using name in variables.tf
+data ibm_is_image "image_id" {
+  name = "${var.image}"
+}
+
+resource "ibm_is_instance" "new_vsi" {
+name  = "{$var.ihostname}"
+vpc     = "${ibm_is_vpc.new_vpc.id}"
+image   = "${data.ibm_is_image.image_id.id}"
+profile = "${var.profile}"
 }
