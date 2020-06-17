@@ -13,8 +13,19 @@ data ibm_is_image "image_id" {
 }
 
 resource "ibm_is_instance" "new_vsi" {
-name  = "{$var.ihostname}"
+name  = "{$var.hostname}"
 vpc     = "${var.vpcname}"
+keys    = ["${data.ibm_is_ssh_key.ssh_key_id.id}"]
+zone    = "${var.region}-1"
 image   = "${data.ibm_is_image.image_id.id}"
 profile = "${var.profile}"
+}
+
+resource "ibm_is_floating_ip" "fip1" {
+  name   = "${local.BASENAME}-fip1"
+  target = ibm_is_instance.new_vsi.primary_network_interface[0].id
+}
+
+output "sshcommand" {
+  value = "ssh root@ibm_is_floating_ip.fip1.address"
 }
