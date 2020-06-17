@@ -14,7 +14,7 @@ data ibm_is_image "image_id" {
 
 resource "ibm_is_instance" "new_vsi" {
 name  = "{$var.ihostname}"
-vpc     = "${ibm_is_vpc.new_vpc.id}"
+vpc     = "${var.vpcname}"
 image   = "${data.ibm_is_image.image_id.id}"
 profile = "${var.profile}"
 }
