@@ -18,7 +18,7 @@ resource "ibm_is_instance" "instance" {
   image   = "${var.image}"
   profile = "${var.profile}"
   primary_network_interface {
-    subnet          = "${element((data.ibm_is_vpc.myvpc.subnets.*.id), 0)}"
+    subnet          = ["${element((data.ibm_is_vpc.myvpc.subnets.*.id), 0)}"]
   }
   resource_group = "${data.ibm_resource_group.myrg.id}"
   vpc       = "${data.ibm_is_vpc.myvpc.id}"
