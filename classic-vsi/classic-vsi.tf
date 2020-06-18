@@ -18,10 +18,10 @@ resource "ibm_is_instance" "instance" {
   image   = "${var.image}"
   profile = "${var.profile}"
   primary_network_interface {
-    subnet          = data.ibm_is_vpc.myvpc.subnets[0].id
+    subnet          = "${data.ibm_is_vpc.myvpc.subnets[0].id}"
   }
-  resource_group = data.ibm_resource_group.myrg.id
-  vpc       = data.ibm_is_vpc.myvpc.id
+  resource_group = "${data.ibm_resource_group.myrg.id}"
+  vpc       = "${data.ibm_is_vpc.myvpc.id}"
   zone    = "${var.region}-1"
-  keys      = [var.ssh_key]
+  keys      = "${var.ssh_key}"
 }
