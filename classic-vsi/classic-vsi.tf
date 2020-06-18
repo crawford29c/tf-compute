@@ -1,6 +1,6 @@
 # provider configuration parameters/variables
 provider "ibm" {
-  ibmcloud_api_key   = var.ibmcloud_api_key
+  ibmcloud_api_key   = "${var.ibmcloud_api_key}"
   generation = 2
   region             = var.region
   iaas_classic_username = var.iaas_classic_username
