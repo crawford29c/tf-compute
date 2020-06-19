@@ -25,7 +25,7 @@ data ibm_is_ssh_key "ssh_key_id" {
 # create volumes for the Delphix VSI
 resource "ibm_is_volume" "new_volume" {
   count = "${var.volumecount}"
-  name = "${var.volumenameprefix}-${count.index + 1}"
+  name = "${var.hostname}-${count.index + 1}"
   profile = "${var.volumeprofile}"
   zone = "${var.region}-1"
   capacity = "${var.volumesize}"
