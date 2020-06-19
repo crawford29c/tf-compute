@@ -48,3 +48,12 @@ resource "ibm_is_instance" "instance" {
             "${element((ibm_is_volume.new_volume.*.id), 3)}"
   ]
 }
+
+resource "ibm_is_floating_ip" "fip1" {
+  name   = "${var.hostname}-fip1"
+  target = ibm_is_instance.new_vsi.primary_network_interface[0].id
+}
+
+output "sshcommand" {
+  value = "ssh root@ibm_is_floating_ip.fip1.address"
+}
