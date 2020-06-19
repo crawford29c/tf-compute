@@ -55,5 +55,5 @@ resource "ibm_is_floating_ip" "fip1" {
 }
 
 output "sshcommand" {
-  value = "ssh root@ibm_is_floating_ip.fip1.address"
+  value = "ssh root@${ibm_is_floating_ip.fip1.address}"
 }
