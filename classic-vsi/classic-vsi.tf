@@ -13,12 +13,17 @@ data "ibm_is_vpc" "myvpc" {
 data "ibm_resource_group" "myrg" {
     name = "default"
 }
+# make OS image details visible by using name in variables.tf
+data ibm_is_image "image_id" {
+  name = "${var.image}"
+}
+
 resource "ibm_is_instance" "instance" {
   name    = "${var.hostname}"
   image   = "${var.image}"
   profile = "${var.profile}"
   primary_network_interface {
-    subnet          = ["${element((data.ibm_is_vpc.myvpc.subnets.*.id), 0)}"]
+    subnet          = "${data.ibm_is_vpc.myvpc.subnets.0.id)}"
   }
   resource_group = "${data.ibm_resource_group.myrg.id}"
   vpc       = "${data.ibm_is_vpc.myvpc.id}"
