@@ -20,7 +20,7 @@ data ibm_is_image "image_id" {
 
 resource "ibm_is_instance" "instance" {
   name    = "${var.hostname}"
-  image   = "${var.image}"
+  image   = "${data.ibm_is_image.image_id.id}"
   profile = "${var.profile}"
   primary_network_interface {
     subnet          = "${data.ibm_is_vpc.myvpc.subnets.0.id}"
