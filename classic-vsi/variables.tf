@@ -47,4 +47,7 @@ variable "vpcname" {
   # default vpc name to be used
   default = "delphix-vpc"
 }
-
+variable "resource_group" {
+  # use default or whatever valid resource name in your account
+  default = "6d5e558f1c854562988ef67a5fec0439"
+}

@@ -11,7 +11,7 @@ data "ibm_is_vpc" "myvpc" {
     name = "${var.vpcname}"
 }
 data "ibm_resource_group" "myrg" {
-    name = "default"
+    name = "${var.resource_group}"
 }
 # make OS image details visible by using name in variables.tf
 data ibm_is_image "image_id" {
