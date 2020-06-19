@@ -33,6 +33,11 @@ variable "profile" {
     default = "mx2-16x128"
 }
 
+variable "volumecount" {
+  # default volume count
+    default = "1"
+}
+
 variable "volumeprofile" {
   # default volume profile to be used
     default = "10iops-tier"

@@ -22,6 +22,15 @@ data ibm_is_ssh_key "ssh_key_id" {
   name = "${var.ssh_key}"
 }
 
+# create volumes for the Delphix VSI
+resource "ibm_is_volume" "new_volume" {
+  count = "${var.volumecount}"
+  name = "${var.volumenameprefix}-${count.index + 1}"
+  profile = "${var.volumeprofile}"
+  zone = "${var.region}-1"
+  capacity = "${var.volumesize}"
+}
+
 resource "ibm_is_instance" "instance" {
   name    = "${var.hostname}"
   image   = "${data.ibm_is_image.image_id.id}"
@@ -33,4 +42,9 @@ resource "ibm_is_instance" "instance" {
   vpc       = "${data.ibm_is_vpc.myvpc.id}"
   zone    = "${var.region}-1"
   keys      = ["${data.ibm_is_ssh_key.ssh_key_id.id}"]
+  volumes = ["${element((ibm_is_volume.new_volume.*.id), 0)}",
+            "${element((ibm_is_volume.new_volume.*.id), 1)}",
+            "${element((ibm_is_volume.new_volume.*.id), 2)}",
+            "${element((ibm_is_volume.new_volume.*.id), 3)}"
+  ]
 }
