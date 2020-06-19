@@ -49,5 +49,5 @@ variable "vpcname" {
 }
 variable "resource_group" {
   # use default or whatever valid resource name in your account
-  default = "6714870130b44afaaaad21f3f4819846"
+  default = "default"
 }
