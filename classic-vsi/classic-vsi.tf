@@ -10,9 +10,9 @@ provider "ibm" {
 data "ibm_is_vpc" "myvpc" {
     name = "${var.vpcname}"
 }
-data "ibm_resource_group" "myrg" {
-    name = "${var.resource_group}"
-}
+#data "ibm_resource_group" "myrg" {
+#    name = "${var.resource_group}"
+#}
 # make OS image details visible by using name in variables.tf
 data ibm_is_image "image_id" {
   name = "${var.image}"
