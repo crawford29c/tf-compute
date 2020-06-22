@@ -14,11 +14,6 @@ data "ibm_resource_group" "myrg" {
     name = "${var.resource_group}"
 }
 
-# make OS image details visible by using name in variables.tf
-data ibm_is_image "image_id" {
-  name = "${var.image}"
-}
-
 # make ssh key details visible by using name in variables.tf
 data ibm_is_ssh_key "ssh_key_id" {
   name = "${var.ssh_key}"
