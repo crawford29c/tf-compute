@@ -67,3 +67,7 @@ variable "vnf_cos_image_url" {
   description = "The COS image object SQL URL for Delphix image."
 }
 
+variable "vnf_vpc_image_name" {
+  default     = "delphix-ga6"
+  description = "The name of the RHEL7 custom image to be provisioned in your IBM Cloud account."
+}
