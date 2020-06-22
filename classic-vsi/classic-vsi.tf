@@ -22,6 +22,22 @@ data ibm_is_ssh_key "ssh_key_id" {
   name = "${var.ssh_key}"
 }
 
+# Generating random ID
+resource "random_uuid" "test" { }
+
+resource "ibm_is_image" "vnf_custom_image" {
+  depends_on       = ["random_uuid.test"]
+  href             = "${var.vnf_cos_image_url}"
+  name             = "${var.vnf_vpc_image_name}-${substr(random_uuid.test.result,0,8)}"
+  operating_system = "red-7-amd64"
+  resource_group = "${data.ibm_resource_group.rg.id}"
+
+  timeouts {
+    create = "30m"
+    delete = "10m"
+  }
+}
+
 # create volumes for the Delphix VSI
 resource "ibm_is_volume" "new_volume" {
   count = "${var.volumecount}"
@@ -33,14 +49,14 @@ resource "ibm_is_volume" "new_volume" {
 
 resource "ibm_is_instance" "instance" {
   name    = "${var.hostname}"
-  image   = "${data.ibm_is_image.image_id.id}"
+  image   = "${ibm_is_image.vnf_custom_image.id}"
   profile = "${var.profile}"
   primary_network_interface {
     subnet          = "${data.ibm_is_vpc.myvpc.subnets.0.id}"
   }
   # resource_group = "${data.ibm_resource_group.myrg.id}"
   vpc       = "${data.ibm_is_vpc.myvpc.id}"
-  zone    = "${var.region}-1"
+  zone    = "${var.zone}"
   keys      = ["${data.ibm_is_ssh_key.ssh_key_id.id}"]
   volumes = ["${element((ibm_is_volume.new_volume.*.id), 0)}",
             "${element((ibm_is_volume.new_volume.*.id), 1)}",
