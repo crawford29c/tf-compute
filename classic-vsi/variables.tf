@@ -1,56 +1,62 @@
 variable "ibmcloud_api_key" {
   # defined in tfvars
+    description = "The user's IBM Cloud api key."
 }
 variable "ssh_key" {
   # defined in tfvars
+  description = "The name of the public SSH key to be used when provisining Delphix VSI."
 }
 
 variable "iaas_classic_username" {
  # defined in tfvars
+   description = "The user's classic infastructure user name."
 }
 
 variable "iaas_classic_api_key" {
   # defined in tfvars
+    description = "The account's classic infastructure api key."
 }
 
 variable "hostname" {
   # default region to be used
     default = "vm1"
+    description = "The name of your Delphix Virtual Server to be provisioned."
 }
 
 variable "region" {
   # default region to be used
     default = "us-south"
-}
-
-variable "image" {
-  # Delphix OS image to be used
-    default = "delphix-ga6"
+    description = "Optional. The value of the region of VPC."
 }
 
 variable "profile" {
   # default compute profile to be used
     default = "mx2-16x128"
+    description = "The profile of compute CPU and memory resources to be used when provisioning the Delphix VSI. For a list of available profiles, visit https://cloud.ibm.com/docs/vpc?topic=vpc-profiles"
 }
 
 variable "volumecount" {
   # default volume count
     default = "1"
+    description = "The number of block storage volumes to create for the Delphix VSI."
 }
 
 variable "volumeprofile" {
   # default volume profile to be used
     default = "10iops-tier"
+    description = "The block storage profile to use. The default uses the 10 IOPS/GB tier for the most demanding workloads."
 }
 
 variable "volumesize" {
   # default volume size to be used
     default = "25"
+    description = "The block storage volume size in GB. Enter a size between 10 and 2000 GB."
 }
 
 variable "vpcname" {
   # default vpc name to be used
   default = "delphix-vpc"
+  description = "The name of your VPC where the Delphix  VSI is to be provisioned."
 }
 variable "zone" {
   default     = "us-south-1"
@@ -60,6 +66,7 @@ variable "zone" {
 variable "resource_group" {
   # use default or whatever valid resource name in your account
   default = "default"
+  description = "Optional. The value of the resource group of VPC."
 }
 
 variable "vnf_cos_image_url" {
@@ -69,5 +76,5 @@ variable "vnf_cos_image_url" {
 
 variable "vnf_vpc_image_name" {
   default     = "delphix-ga6"
-  description = "The name of the RHEL7 custom image to be provisioned in your IBM Cloud account."
-}
+  description = "The name of the custom image to be provisioned in your IBM Cloud account."
+"}
