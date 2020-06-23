@@ -44,7 +44,7 @@ variable "volumecount" {
 variable "volumeprofile" {
   # default volume profile to be used
     default = "10iops-tier"
-    description = "The block storage profile to use. The default uses the 10 IOPS/GB tier for the most demanding workloads."
+    description = "The block storage profile to use. The default uses the 10 IOPS/GB tier for the most demanding workloads. For more information on volume profiles, visit https://cloud.ibm.com/docs/vpc?topic=vpc-block-storage-profiles"
 }
 
 variable "volumesize" {
