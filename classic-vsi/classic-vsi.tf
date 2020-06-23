@@ -40,7 +40,7 @@ resource "ibm_is_volume" "new_volume" {
   count = "${var.volumecount}"
   name = "${var.hostname}-${count.index + 1}"
   profile = "${var.volumeprofile}"
-  zone = "${var.region}-1"
+  zone = "${var.zone}"
   capacity = "${var.volumesize}"
 }
 
@@ -55,11 +55,12 @@ resource "ibm_is_instance" "instance" {
   vpc       = "${data.ibm_is_vpc.myvpc.id}"
   zone    = "${var.zone}"
   keys      = ["${data.ibm_is_ssh_key.ssh_key_id.id}"]
-  volumes = ["${element((ibm_is_volume.new_volume.*.id), 0)}",
-            "${element((ibm_is_volume.new_volume.*.id), 1)}",
-            "${element((ibm_is_volume.new_volume.*.id), 2)}",
-            "${element((ibm_is_volume.new_volume.*.id), 3)}"
-  ]
+  volumes = "${ibm_is_volume.new_volume.*.id}"
+  #volumes = ["${element((ibm_is_volume.new_volume.*.id),0)}",
+  #          "${element((ibm_is_volume.new_volume.*.id), 1)}",
+  #          "${element((ibm_is_volume.new_volume.*.id), 2)}",
+  #          "${element((ibm_is_volume.new_volume.*.id), 3)}"
+  #]
 }
 
 resource "ibm_is_floating_ip" "fip1" {
