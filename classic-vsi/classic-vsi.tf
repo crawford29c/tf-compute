@@ -55,7 +55,7 @@ resource "ibm_is_instance" "instance" {
   vpc       = "${data.ibm_is_vpc.myvpc.id}"
   zone    = "${var.zone}"
   keys      = ["${data.ibm_is_ssh_key.ssh_key_id.id}"]
-  volumes = "${ibm_is_volume.new_volume.*.id}"
+  volumes = ["${ibm_is_volume.new_volume.*.id}"]
   #volumes = ["${element((ibm_is_volume.new_volume.*.id),0)}",
   #          "${element((ibm_is_volume.new_volume.*.id), 1)}",
   #          "${element((ibm_is_volume.new_volume.*.id), 2)}",
