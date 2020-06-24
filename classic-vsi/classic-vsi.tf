@@ -35,6 +35,10 @@ resource "ibm_is_image" "vnf_custom_image" {
   }
 }
 
+data "ibm_is_subnet" "subnet1"{
+   identifier = "${var.subnet_id}"
+}
+
 # create volumes for the Delphix VSI
 resource "ibm_is_volume" "new_volume" {
   count = "${var.volumecount}"
@@ -49,18 +53,13 @@ resource "ibm_is_instance" "instance" {
   image   = "${ibm_is_image.vnf_custom_image.id}"
   profile = "${var.profile}"
   primary_network_interface {
-    subnet          = "${data.ibm_is_vpc.myvpc.subnets.0.id}"
+    subnet          = "${data.ibm_is_subnet.subnet1.id}"
   }
   # resource_group = "${data.ibm_resource_group.myrg.id}"
   vpc       = "${data.ibm_is_vpc.myvpc.id}"
   zone    = "${var.zone}"
   keys      = ["${data.ibm_is_ssh_key.ssh_key_id.id}"]
   volumes = ["${ibm_is_volume.new_volume.*.id}"]
-  #volumes = ["${element((ibm_is_volume.new_volume.*.id),0)}",
-  #          "${element((ibm_is_volume.new_volume.*.id), 1)}",
-  #          "${element((ibm_is_volume.new_volume.*.id), 2)}",
-  #          "${element((ibm_is_volume.new_volume.*.id), 3)}"
-  #]
 }
 
 resource "ibm_is_floating_ip" "fip1" {

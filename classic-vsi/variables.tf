@@ -1,3 +1,8 @@
+variable "TF_VERSION" {
+  default = "0.12"
+  description = "terraform engine version to be used in schematics"
+}
+
 variable "ibmcloud_api_key" {
   # defined in tfvars
     description = "The user's IBM Cloud api key."
@@ -77,4 +82,9 @@ variable "vnf_cos_image_url" {
 variable "vnf_vpc_image_name" {
   default     = "delphix-ga6"
   description = "The name of the custom image to be provisioned in your IBM Cloud account."
+}
+
+variable "subnet_id" {
+  default = ""
+  description = "The id of the subnet where the Delhpix VSI is to be provisioned."
 }
