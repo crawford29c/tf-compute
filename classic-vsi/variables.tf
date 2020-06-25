@@ -23,14 +23,14 @@ variable "iaas_classic_api_key" {
 }
 
 variable "hostname" {
-  # default region to be used
+  # default hostname to be used
     default = "vm1"
     description = "The name of your Delphix Virtual Server to be provisioned."
 }
 
 variable "region" {
   # default region to be used
-    default = "us-south"
+    default = ""
     description = "Optional. The value of the region of VPC."
 }
 
@@ -64,7 +64,7 @@ variable "vpcname" {
   description = "The name of your VPC where the Delphix  VSI is to be provisioned."
 }
 variable "zone" {
-  default     = "us-south-1"
+  default     = ""
   description = "The VPC Zone that you want your VPC networks and virtual servers to be provisioned in. To list available zones, run `ibmcloud is zones`."
 }
 
