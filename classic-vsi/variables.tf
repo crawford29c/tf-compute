@@ -75,12 +75,12 @@ variable "resource_group" {
 }
 
 variable "vnf_cos_image_url" {
-  default     = "cos://us-south/delphix-images/Delphix_6.0.0.0_2020-01-17-16-36_Standard_KVM.qcow2"
+  default     = "cos://us-south/delphix-images/Delphix_6.0.2.1_2020-06-03-17-16_Standard_KVM.qcow2"
   description = "The COS image object SQL URL for Delphix image."
 }
 
 variable "vnf_vpc_image_name" {
-  default     = "delphix-ga6"
+  default     = "delphix-ga6021"
   description = "The name of the custom image to be provisioned in your IBM Cloud account."
 }
 
